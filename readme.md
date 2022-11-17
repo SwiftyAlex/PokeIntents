@@ -1,5 +1,3 @@
-# PokéIntents
-
 <p align="center">
   <img src="assets/cover-ghub.svg" alt="Cover">
 </p>
@@ -18,7 +16,7 @@ The mechanism for comparators is a custom solution with an enum for each, allowi
 
 Checkout `PokemonQuery` for more.
 
-<p align="right">
+<p align="center">
   <img src="assets/query-demo-1.png" alt="The shortcuts query editor." width="200">
 </p>
 
@@ -26,34 +24,31 @@ Checkout `PokemonQuery` for more.
 
 Interacting with the user defaults is possible from the intents as they all run within your main apps container. You can favourite and unfavourite a pokemon directly from shortcuts.
 
-
-
-<p align="right">
+<p align="center">
 <img src="assets/favourite-demo-1.png" alt="The shortcuts query editor." width="200">
 <img src="assets/favourite-demo-2.png" alt="Mew with a star showing that it was favourited." width="200">
 </p>
-
 
 ### Open with intents
 
 On each pokemon page there's a Siri prompt to open that again with your voice. This is a simple solution using the latest NavigationStack api. This is also exposed to shortcuts.
 
-<p align="right">
+<p align="center">
 <img src="assets/open-demo-1.png" alt="The shortcuts query editor." width="200">
 <img src="assets/open-demo-2.png" alt="The app with mew open." width="200">
 </p>
-
 
 ### Open without the app
 
 You can use a shortcut to preview without opening the app. When you combine this with queries, it allows for entirely shortcut based viewing, to the point you may not even need to use the app.
 
-<p align="right">
+<p align="center">
 <img src="assets/view-demo-1.png" alt="The shortcuts query editor." width="200">
 <img src="assets/view-demo-2.png" alt="A small preview view of mew." width="200">
 </p>
 
-## Data
+
+## Data
 
 ### Source
 The data for this app was generated using this query on [pokeapi.co](https://pokeapi.co), and downloaded as a local JSON to avoid hitting someone elses API in sample code.
@@ -81,7 +76,6 @@ Mapping is quickly done using quicktype.io. There's some awkwardness with the sp
 
 ---
 
-
 <p align="center">
-  <img src="assets/icon-ghub.svg" alt="Icon" width="256">
+  <img src="assets/icon.svg" alt="Icon" width="256">
 </p>

@@ -8,19 +8,60 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.dataSource) var dataSource
+    @State var navigationPath: NavigationPath = .init()
+    @State var secondaryPath: NavigationPath = .init()
+    @State var selectedTab: Int = 0
+
+    @StateObject var model: ContentModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $selectedTab) {
+            NavigationStack(path: $navigationPath) {
+                Pokedex(model: PokedexModel(dataSource: dataSource))
+                    .applyPokemonDestination()
+            }
+            .tabItem {
+                Label("Pokemon", systemImage: "leaf.fill")
+            }
+            .tag(0)
+            NavigationStack(path: $secondaryPath) {
+                FavouritePokemon(model: FavouritesModel(dataSource: dataSource))
+                    .applyPokemonDestination()
+            }
+            .tabItem {
+                Label("Favourites", systemImage: "star")
+            }
+            .tag(1)
         }
-        .padding()
+        .onChange(of: model.destinations) { destinations in
+            if let nextDestination = destinations.first {
+                switch nextDestination {
+                case .pokemon(let pokemon):
+                    secondaryPath.removeLast(navigationPath.count)
+                    selectedTab = 0
+                    navigationPath.append(pokemon)
+                case .favourites:
+                    navigationPath.removeLast(navigationPath.count)
+                    secondaryPath.removeLast(navigationPath.count)
+                    selectedTab = 1
+                }
+                model.consume(destination: nextDestination)
+            }
+        }
+    }
+}
+
+private extension View {
+    func applyPokemonDestination() -> some View {
+        self.navigationDestination(for: Pokemon.self) { pokemon in
+            PokemonDetail(pokemon: pokemon)
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(model: ContentModel(intentBridge: .shared))
     }
 }
